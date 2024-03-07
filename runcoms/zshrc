@@ -103,6 +103,18 @@ vpn() (
   open '/Applications/Cisco/Cisco AnyConnect Secure Mobility Client.app'
 )
 
+## fgh move ghq
+function fgh() {
+  local src=$(ghq list | fzf --preview "bat --color=always --style=header,grid --line-range :80 $(ghq root)/{}/README.*")
+  cd "$(ghq root)/$src"
+}
+
+## fgc open code ghq
+function fgc() {
+  local src=$(ghq list | fzf --preview "bat --color=always --style=header,grid --line-range :80 $(ghq root)/{}/README.*")
+  code --profile dmm "$(ghq root)/$src"
+}
+
 ## autojump
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
@@ -111,7 +123,8 @@ export FZF_COMPLETION_TRIGGER=','
 
 ## nvm
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 ## Cargo compete系
 alias atc="cargo compete"
@@ -132,7 +145,13 @@ export GOOGLE_APPLICATION_CREDENTIALS=/Users/MIZUNO-HIROAKI/.gcp/credentials/cre
 # source /Users/MIZUNO-HIROAKI/.phpbrew/bashrc
 
 ## golang
-export PATH="$PATH:/Users/MIZUNO-HIROAKI/go/bin"
+export GOPATH=`go env GOPATH`
+export PATH=$PATH:$GOPATH/bin
+export GO111MODULE=on
+
+# mysql
+export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
+
 
 ## lazygit
 alias lg='lazygit'
