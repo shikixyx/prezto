@@ -112,7 +112,7 @@ function fgh() {
 ## fgc open code ghq
 function fgc() {
   local src=$(ghq list | fzf --preview "bat --color=always --style=header,grid --line-range :80 $(ghq root)/{}/README.*")
-  code --profile dmm "$(ghq root)/$src"
+  code --profile private "$(ghq root)/$src"
 }
 
 ## autojump
