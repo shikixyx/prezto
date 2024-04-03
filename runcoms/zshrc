@@ -112,6 +112,12 @@ function fgh() {
 ## fgc open code ghq
 function fgc() {
   local src=$(ghq list | fzf --preview "bat --color=always --style=header,grid --line-range :80 $(ghq root)/{}/README.*")
+  code --profile work "$(ghq root)/$src"
+}
+
+## fgc open code ghq
+function fgcp() {
+  local src=$(ghq list | fzf --preview "bat --color=always --style=header,grid --line-range :80 $(ghq root)/{}/README.*")
   code --profile private "$(ghq root)/$src"
 }
 
